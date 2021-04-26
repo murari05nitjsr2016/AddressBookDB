@@ -1,0 +1,60 @@
+//1.Create Database
+
+mysql> create database address_book_service;
+Query OK, 1 row affected (0.19 sec)
+
+//2.create a  table  name address_book inside address_book_service
+create table address_book
+    -> (
+    -> first_name varchar(30) NOT NULL,
+    -> last_name varchar(30) NOT NULL,
+    -> address varchar(100) NOT NULL,
+    -> city varchar(30) NOT NULL,
+    -> state varchar(30) NOT NULL,
+    -> zip int(10) NOT NULL,
+    -> mobile_no int(12) NOT NULL,
+    -> email varchar(30) NOT NULL
+    -> );
+Query OK, 0 rows affected, 2 warnings (2.29 sec)
+
+//3.insertion in table
+
+mysql> INSERT INTO address_book ( first_Name, last_Name, address, city, state, zip, mobile_no, email) values
+    -> ('Kelly', 'Kapowski', '16 Scranton Ave', 'Scranton', 'PA', 18503, 800554581, 'morgan.kapowski@gmail.com'),
+    -> ('Jesse', 'Spano', '25 First Streat', 'Cambridge', 'MA', 21430, 8884555768, 'jacy.spano@hotmail.com');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+//4. Edit row on given condition
+
+mysql> update address_book set address = 'patna' where first_name = 'Jesse';
+Query OK, 1 row affected (0.34 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+//.5.Delete the row on given condition
+mysql>  DELETE FROM address_book where first_name = 'Jesse';
+Query OK, 1 row affected (0.09 sec)
+
+
+//6.query to fetch a particular record
+SELECT * FROM address_book where city = 'Cambridge' AND state = 'TX';
+
+//7.Query to understand the size of address book by city or state
+
+mysql> SELECT COUNT(city) FROM address_book;
+mysql> SELECT COUNT(state) FROM address_book;
+
+//8.Query to fetch record in sorted order
+
+mysql> SELECT * FROM address_book order by first_name asc;
+
+//9.Query to add new columnn
+mysql> ALTER TABLE address_book ADD type VARCHAR(150) AFTER email;
+Query OK, 0 rows affected (2.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+//10. query to count records
+
+SELECT type, COUNT(*) FROM address_book GROUP BY type;
+
